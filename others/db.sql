@@ -1,0 +1,28 @@
+CREATE DATABASE TimeTable;
+
+USE TimeTable;
+
+CREATE TABLE Classrooms (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	lib VARCHAR(64),
+	max INT
+);
+
+CREATE TABLE Teachers (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	firstName VARCHAR(64),
+	lastName VARCHAR(64)
+);
+
+CREATE TABLE Lessons (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	lib VARCHAR(64)
+);
+
+CREATE TABLE Plans (
+	idTeacher INT,
+	idLesson INT,
+	idClassroom INT,
+	start TIMESTAMP,
+	end TIMESTAMP
+);
