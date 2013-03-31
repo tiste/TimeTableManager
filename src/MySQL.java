@@ -1,28 +1,16 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.*;
 
 
 public class MySQL {
 	
-	public List<String> query(String sql) {
-		List<String> rs = new ArrayList<String>();
+	public ResultSet query(String sql) {
+		ResultSet rs = null;
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost/Ypnose", "root", "");
+			Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost/TimeTable", "root", "");
 			Statement stat = cnx.createStatement();
-			ResultSet res = stat.executeQuery(sql);
-			
-			while (res.next()) {
-				System.out.println(res);
-			}
-			
-			cnx.close();
+			rs = stat.executeQuery(sql);
 		} catch (InstantiationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -36,8 +24,6 @@ public class MySQL {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//System.out.println(rs);
 		
 		return rs;
 	}
