@@ -1,4 +1,6 @@
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Teacher {
@@ -6,10 +8,13 @@ public class Teacher {
 	String firstName;
 	String lastName;
 	
-	
+	/**
+	 * Instanciate a teacher
+	 * @param id
+	 */
 	public Teacher(int id) {
 		MySQL m = new MySQL();
-		ResultSet rs = m.query("SELECT id, firstName, lastName FROM Teachers WHERE id = " + id);
+		ResultSet rs = m.query("SELECT id, firstName, lastName FROM Teachers WHERE id = " + id + ";");
 		
 		try {
 			while (rs.next()) {
@@ -46,10 +51,32 @@ public class Teacher {
 	public String getLastName() {
 		return lastName;
 	}
-
 	
-	public static void main(String[] args) {
-		Teacher t = new Teacher(1);
-		System.out.println(t.getFirstName());
+	/**
+	 * To string
+	 */
+	public String toString() {
+		return this.firstName + " " + this.lastName;
+	}
+	
+	/**
+	 * Find all teachers
+	 * @return array Teachers
+	 */
+	public static List<Teacher> findAll() {
+		List<Teacher> ts = new ArrayList<Teacher>();
+		MySQL m = new MySQL();
+		ResultSet rs = m.query("SELECT id FROM Teachers;");
+		
+		try {
+			while (rs.next()) {
+				ts.add(new Teacher(rs.getInt("id")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return ts;
 	}
 }
