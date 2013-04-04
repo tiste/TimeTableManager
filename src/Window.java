@@ -18,6 +18,11 @@ public class Window extends JFrame implements ActionListener {
 	private List<JMenuItem> choice;
 	
 	
+	/**
+	 * Create a JFrame
+	 * @param pan JPanel
+	 * @param title Page title
+	 */
 	public Window(JPanel pan, String title) {
 		if (System.getProperty("os.name").contains("Mac")) {
 			System.setProperty("apple.laf.useScreenMenuBar", "true");
