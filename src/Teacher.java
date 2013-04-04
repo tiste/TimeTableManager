@@ -4,9 +4,9 @@ import java.util.List;
 
 
 public class Teacher {
-	int id;
-	String firstName;
-	String lastName;
+	private int id;
+	private String firstName;
+	private String lastName;
 	
 	/**
 	 * Instanciate a teacher
@@ -18,7 +18,7 @@ public class Teacher {
 		
 		try {
 			while (rs.next()) {
-				id = rs.getInt("id");
+				this.id = rs.getInt("id");
 				firstName = rs.getString("firstName");
 				lastName = rs.getString("lastName");
 			}

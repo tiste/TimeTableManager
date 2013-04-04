@@ -19,6 +19,10 @@ public class Window extends JFrame implements ActionListener {
 	
 	
 	public Window(JPanel pan, String title) {
+		if (System.getProperty("os.name").contains("Mac")) {
+			System.setProperty("apple.laf.useScreenMenuBar", "true");
+		}
+		
 		menuBar = new JMenuBar();
 		menu = new JMenu("Fichier");
 		choice = new ArrayList<JMenuItem>();
@@ -38,7 +42,7 @@ public class Window extends JFrame implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == choice.get(0)) {
-			new Window(new TimeTable(), "Nouvelle planification").setVisible(true);
+			new Window(new Plan(), "Nouvelle planification").setVisible(true);
 		}
 	}
 }
