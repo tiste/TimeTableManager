@@ -1,4 +1,6 @@
+import javax.swing.JPanel;
 
-public class Plan {
 
+public class Plan extends JPanel {
+	
 }
