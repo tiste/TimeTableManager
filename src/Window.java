@@ -43,6 +43,7 @@ public class Window extends JFrame implements ActionListener {
 		this.setSize(pan.getWidth() + this.getInsets().left + this.getInsets().right, 
 				pan.getHeight() + this.getInsets().top + this.getInsets().bottom);
 		this.setLocationRelativeTo(null);
+		this.setResizable(false);
 	}
 	
 	public void actionPerformed(ActionEvent e) {

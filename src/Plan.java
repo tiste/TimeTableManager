@@ -25,6 +25,7 @@ public class Plan extends JPanel implements ActionListener {
 		this.setBackground(Color.WHITE);
 		this.setLayout(null);
 		
+		// Labels
 		JLabel label1 = new JLabel("Professeur");
 		label1.setBounds(60, 10, 100, 30);
 		this.add(label1);
@@ -38,19 +39,18 @@ public class Plan extends JPanel implements ActionListener {
 		label4.setBounds(60, 160, 100, 30);
 		this.add(label4);
 		
+		// Combobox
 		combo = new JComboBox[4];
 		combo[0] = new JComboBox(Teacher.findAll().toArray());
 		combo[0].setBounds(50, 30, 200, 30);
 		combo[0].setSelectedIndex(0);
 		combo[0].setMaximumRowCount(4);
 		combo[0].addActionListener(this);
-		this.add(combo[0]);
 		combo[1] = new JComboBox(Lesson.findAll().toArray());
 		combo[1].setBounds(50, 80, 200, 30);
 		combo[1].setSelectedIndex(0);
 		combo[1].setMaximumRowCount(4);
 		combo[1].addActionListener(this);
-		this.add(combo[1]);
 		combo[2] = new JComboBox();
 		combo[2].addItem("08-10");
 		combo[2].addItem("10-12");
@@ -60,13 +60,14 @@ public class Plan extends JPanel implements ActionListener {
 		combo[2].setSelectedIndex(0);
 		combo[2].setMaximumRowCount(4);
 		combo[2].addActionListener(this);
-		this.add(combo[2]);
 		combo[3] = new JComboBox(Classroom.findAll().toArray());
 		combo[3].setBounds(50, 180, 200, 30);
 		combo[3].setSelectedIndex(0);
 		combo[3].setMaximumRowCount(4);
 		combo[3].addActionListener(this);
-		this.add(combo[3]);
+		for (int i=0; i<4 ; i++) {
+			this.add(combo[i]);
+		}
 		
 		date = new JTextField("JJ/MM/AAAA");
 		date.setBounds(50, 130, 100, 30);
