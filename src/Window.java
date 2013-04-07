@@ -48,7 +48,7 @@ public class Window extends JFrame implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == choice.get(0)) {
-			new Window(new Plan(), "Nouvelle planification").setVisible(true);
+			new Window(new SetPlan(), "Nouvelle planification").setVisible(true);
 		}
 	}
 }
