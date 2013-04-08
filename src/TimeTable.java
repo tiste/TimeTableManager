@@ -16,6 +16,7 @@ public class TimeTable extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	
 	private Classroom classroom;
+	private String week;
 	private JLabel[] label;
 	private JComboBox[] combo;
 	
@@ -54,14 +55,21 @@ public class TimeTable extends JPanel implements ActionListener {
 		}
 		
 		// Combobox
-		combo = new JComboBox[1];
+		combo = new JComboBox[2];
 		combo[0] = new JComboBox(Classroom.findAll().toArray());
 		classroom = (classroom == null) ? new Classroom(1) : classroom;
 		combo[0].setBounds(50, 30, 200, 30);
-		combo[0].setSelectedIndex(classroom.getId()-1);
-		combo[0].setMaximumRowCount(4);
-		combo[0].addActionListener(this);
-		this.add(combo[0]);
+		combo[1] = new JComboBox();
+		week = (week == null) ? "Semaine 1" : week;
+		for (int i=1; i<52; i++) {
+			combo[1].addItem("Semaine "+i);
+		}
+		combo[1].setBounds(250, 30, 200, 30);
+		for (int i=0; i<2 ; i++) {
+			combo[i].setMaximumRowCount(4);
+			combo[i].addActionListener(this);
+			this.add(combo[i]);
+		}
 	}
 	
     public void paintComponent(Graphics g) {
@@ -87,7 +95,7 @@ public class TimeTable extends JPanel implements ActionListener {
         g.drawLine(50, 420, 630, 420);
         
         // Affichage des blocs
-        List<Plan> lp = Plan.findWith(classroom, "2013-01-01", "2013-12-24");
+        List<Plan> lp = Plan.findWith(classroom, week);
         for (int i=0; i<lp.size(); i++) {
         	Plan p = lp.get(i);
         	int day = Integer.parseInt(p.getStart().split("/")[0]) + 1;
@@ -173,6 +181,9 @@ public class TimeTable extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == combo[0]) {
 			classroom = (Classroom) combo[0].getSelectedItem();
+			this.repaint();
+		} else if (e.getSource() == combo[1]) {
+			week = (String) combo[1].getSelectedItem();
 			this.repaint();
 		}
 	}

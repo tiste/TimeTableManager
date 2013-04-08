@@ -40,10 +40,10 @@ public class Plan {
 		return end;
 	}
 
-	public static List<Plan> findWith(Classroom c, String start, String end) {
+	public static List<Plan> findWith(Classroom c, String week) {
 		List<Plan> lp = new ArrayList<Plan>();
 		MySQL m = new MySQL();
-		ResultSet rs = m.query("SELECT idTeacher, idLesson, idClassroom, DATE_FORMAT(start, '%w/%H') AS start, DATE_FORMAT(end, '%w/%H') AS end FROM Plans WHERE idClassroom = " + c.getId() + " AND start > '"+ start +"' AND end < '"+ end +"';");
+		ResultSet rs = m.query("SELECT idTeacher, idLesson, idClassroom, DATE_FORMAT(start, '%w/%H') AS start, DATE_FORMAT(end, '%w/%H') AS end FROM Plans WHERE idClassroom = " + c.getId() + " AND WEEK(start) = '"+ week.split(" ")[1] +"';");
 		
 		try {
 			while (rs.next()) {

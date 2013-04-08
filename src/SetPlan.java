@@ -43,38 +43,26 @@ public class SetPlan extends JPanel implements ActionListener {
 		combo = new JComboBox[5];
 		combo[0] = new JComboBox(Teacher.findAll().toArray());
 		combo[0].setBounds(50, 30, 200, 30);
-		combo[0].setSelectedIndex(0);
-		combo[0].setMaximumRowCount(4);
-		combo[0].addActionListener(this);
 		combo[1] = new JComboBox(Lesson.findAll().toArray());
 		combo[1].setBounds(50, 80, 200, 30);
-		combo[1].setSelectedIndex(0);
-		combo[1].setMaximumRowCount(4);
-		combo[1].addActionListener(this);
 		combo[2] = new JComboBox();
 		combo[2].addItem("08");
 		combo[2].addItem("10");
 		combo[2].addItem("13");
 		combo[2].addItem("15");
 		combo[2].setBounds(150, 120, 100, 30);
-		combo[2].setSelectedIndex(0);
-		combo[2].setMaximumRowCount(4);
-		combo[2].addActionListener(this);
 		combo[3] = new JComboBox();
 		combo[3].addItem("10");
 		combo[3].addItem("12");
 		combo[3].addItem("15");
 		combo[3].addItem("17");
 		combo[3].setBounds(150, 140, 100, 30);
-		combo[3].setSelectedIndex(0);
-		combo[3].setMaximumRowCount(4);
-		combo[3].addActionListener(this);
 		combo[4] = new JComboBox(Classroom.findAll().toArray());
 		combo[4].setBounds(50, 180, 200, 30);
-		combo[4].setSelectedIndex(0);
-		combo[4].setMaximumRowCount(4);
-		combo[4].addActionListener(this);
 		for (int i=0; i<5 ; i++) {
+			combo[i].setSelectedIndex(0);
+			combo[i].setMaximumRowCount(4);
+			combo[i].addActionListener(this);
 			this.add(combo[i]);
 		}
 		
