@@ -18,6 +18,7 @@ public class TimeTable extends JPanel implements ActionListener {
 	private Classroom classroom;
 	private String week;
 	private JLabel[] label;
+	private JLabel[] labelDisplay;
 	private JComboBox[] combo;
 	
 
@@ -27,6 +28,7 @@ public class TimeTable extends JPanel implements ActionListener {
 		this.setLayout(null);
 
 		label = new JLabel[9];
+		labelDisplay = new JLabel[2];
 
 		// Les jours
 		label[0] = new JLabel("Lundi");
@@ -72,7 +74,7 @@ public class TimeTable extends JPanel implements ActionListener {
 		}
 	}
 	
-    public void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g){
         g.setColor(Color.white);
     	super.paintComponent(g);
     	
@@ -98,13 +100,15 @@ public class TimeTable extends JPanel implements ActionListener {
         List<Plan> lp = Plan.findWith(classroom, week);
         for (int i=0; i<lp.size(); i++) {
         	Plan p = lp.get(i);
+        	Lesson l = p.getLesson();
+        	Teacher t = p.getTeacher();
         	int day = Integer.parseInt(p.getStart().split("/")[0]) + 1;
         	int startHour = Integer.parseInt(p.getStart().split("/")[1]);
         	int endHour = Integer.parseInt(p.getEnd().split("/")[1]);
         	Rectangle coordDay = null;
         	Rectangle coordStartHour = null;
         	Rectangle coordEndHour = null;
-        	
+
         	switch (day) {
 				case 1:
 					coordDay = label[0].getBounds();
@@ -173,17 +177,32 @@ public class TimeTable extends JPanel implements ActionListener {
 			}
         	
         	if (coordDay != null && coordStartHour != null && coordEndHour != null) {
+        		g.setColor(Color.WHITE);
         		g.fillRect(coordDay.x, coordStartHour.y + 5, coordDay.width, coordEndHour.y + coordEndHour.height - coordStartHour.y - 10);
-        	}
+        		g.setColor(Color.GRAY);
+        		g.drawString(l.toString(), coordDay.x + 5, coordStartHour.y + 20);
+        		g.drawString(t.getFirstName().charAt(0)+"."+t.getLastName(), coordDay.x + 5, coordStartHour.y + 40);
+
+        		/*labelDisplay[0] = new JLabel(l.toString());
+        		labelDisplay[1] = new JLabel(t.getFirstName().charAt(0)+"."+t.getLastName());
+        		labelDisplay[0].setBounds(coordDay.x, coordStartHour.y + 5, coordDay.width, coordEndHour.y + coordEndHour.height - coordStartHour.y - 10);
+        		labelDisplay[1].setBounds(coordDay.x, coordStartHour.y + 5, coordDay.width, coordEndHour.y + coordEndHour.height - coordStartHour.y - 40);
+    			this.add(labelDisplay[0]);
+    			this.add(labelDisplay[1]);*/
+    		}
+
         }
     }
     
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == combo[0]) {
 			classroom = (Classroom) combo[0].getSelectedItem();
+			this.updateUI();
 			this.repaint();
+			
 		} else if (e.getSource() == combo[1]) {
 			week = (String) combo[1].getSelectedItem();
+			this.updateUI();
 			this.repaint();
 		}
 	}
